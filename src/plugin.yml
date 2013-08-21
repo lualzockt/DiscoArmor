@@ -1,0 +1,16 @@
+name: DiscoArmor
+version: 1.4.1
+author: LualZockt
+website: http://dev.bukkit.org/bukkit-plugins/discoarmor
+main: com.lualzockt.DiscoArmor.DiscoArmor
+
+commands:
+  discoarmor:
+    description: Disco Armor
+    aliases: [da]
+    
+    
+permissions:
+  discoarmor.toggle:
+    description: Toggles your DiscoArmor-Mode
+    default: true    

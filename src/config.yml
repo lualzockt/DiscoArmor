@@ -1,0 +1,31 @@
+################################################################################################################################################################
+# This is the main config of DiscoArmor
+# Please delete this one after every Update!
+# If you find a bug or have a request, please visit the dev page: http://dev.bukkit.org/server-mods/discoarmor
+# If you want to help me, donate at http://goo.gl/Z2BST or subscribe to me at Youtube: http://youtube.com/user/LualZockt
+################################################################################################################################################################
+# You are not allowed to sell this Plugin or to look into its sourcecode!!!
+################################################################################################################################################################
+enable-max-time: false 
+max-time: 0
+
+delay: 2 # The delay between switching the colors in ticks. 20 ticks are one second!!!
+##########################################################################################################################################################
+# Possible options: nothing, armor and wool for the helmet 
+##########################################################################################################################################################
+armor:
+  helmet: armor
+  chestplate: armor
+  leggings: armor
+  boots: armor
+names:
+  helmet: Discohelmet
+  chestplate: Discochestplate
+  leggings: Discoleggings
+  boots: Discoboots
+messages:
+
+  toggle-true: You are now using DiscoArmor # Message when you enable the DiscoArmor mode
+  
+  toggle-false: You are no longer using DiscoArmor # Message when you disable the DiscoArmor mode
+  
