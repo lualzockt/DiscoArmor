@@ -4,8 +4,6 @@
 # If you find a bug or have a request, please visit the dev page: http://dev.bukkit.org/server-mods/discoarmor
 # If you want to help me, donate at http://goo.gl/Z2BST or subscribe to me at Youtube: http://youtube.com/user/LualZockt
 ################################################################################################################################################################
-# You are not allowed to sell this Plugin or to look into its sourcecode!!!
-################################################################################################################################################################
 enable-max-time: false 
 max-time: 0
 
@@ -23,9 +21,10 @@ names:
   chestplate: Discochestplate
   leggings: Discoleggings
   boots: Discoboots
+async: false
 messages:
 
-  toggle-true: You are now using DiscoArmor # Message when you enable the DiscoArmor mode
+  toggle-true: '§k§1@@§2DiscoMode§k§1@@ §r enabled.' # Message when you enable the DiscoArmor mode
   
-  toggle-false: You are no longer using DiscoArmor # Message when you disable the DiscoArmor mode
+  toggle-false: '§k§1@@§2DiscoMode§k§1@@ §r disabled.' # Message when you disable the DiscoArmor mode
   

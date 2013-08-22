@@ -18,14 +18,14 @@ public class DiscoArmorCommand implements CommandExecutor {
 						plugin.players.clear();
 						plugin.reloadConfig();
 						plugin.loadConfig();
-						sender.sendMessage("§8DiscoArmor has been reloaded.");
+						sender.sendMessage(plugin.PREFIX + " DiscoArmor has been reloaded.");
 					}else {
 						sender.sendMessage("§cYou don't have permission to reload the config.");
 					}
 				}else if(args[0].equalsIgnoreCase("info")) {
-					sender.sendMessage("§7You are using DiscoArmor v. "+ plugin.getDescription().getVersion() + " by LualZockt.");
+					sender.sendMessage(plugin.PREFIX + " §7You are using DiscoArmor v. "+ plugin.getDescription().getVersion() + " by LualZockt.");
 				}else if (args[0].equalsIgnoreCase("help")) {
-					sender.sendMessage("§7Help of DiscoArmor");
+					sender.sendMessage(plugin.PREFIX +" §7Help of DiscoArmor");
 					sender.sendMessage("§c/da toggle§8 - Disable and enable the DiscoArmor-Mode.");
 					sender.sendMessage("§c/da reload§8 - Reloads the Config.");
 					sender.sendMessage("§c/da info§8- Get info about the plugin.");
