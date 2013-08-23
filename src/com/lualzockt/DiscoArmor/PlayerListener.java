@@ -29,7 +29,15 @@ public class PlayerListener implements Listener{
 	public void onDeath(PlayerDeathEvent e) {
 		if(plugin.players.containsKey(e.getEntity().getName())) {
 			plugin.players.remove(e.getEntity().getName());
-			plugin.oldarmor.remove(e.getEntity().getName());
+			if(plugin.oldarmor.containsKey(e.getEntity().getName())) {
+				for(ItemStack i : plugin.oldarmor.get(e.getEntity().getName())) {
+					if(i != null) {
+						e.getDrops().add(i);
+					}
+				}
+				plugin.oldarmor.remove(e.getEntity().getName());
+			}
+			
 			Iterator<ItemStack> it = e.getDrops().iterator();
 			while(it.hasNext()) {
 				ItemStack i = it.next();
@@ -59,20 +67,23 @@ public class PlayerListener implements Listener{
 	public void onQuit(PlayerQuitEvent e){
 		if(plugin.players.containsKey(e.getPlayer().getName())) {
 			plugin.players.remove(e.getPlayer().getName());
-			try {
+			if(plugin.oldarmor.containsKey(e.getPlayer().getName())) {
 				e.getPlayer().getInventory().setArmorContents(plugin.oldarmor.get(e.getPlayer().getName()));
-			}catch(Exception ex) {
-				
+				plugin.oldarmor.remove(e.getPlayer().getName());
 			}
-			plugin.oldarmor.remove(e.getPlayer().getName());
 		}
 	}
 	@EventHandler
 	public void onKick(PlayerKickEvent e){
 		if(plugin.players.containsKey(e.getPlayer().getName())) {
-			plugin.oldarmor.remove(e.getPlayer().getName());
+			if(plugin.oldarmor.containsKey(e.getPlayer().getName())) {
+				e.getPlayer().getInventory().setArmorContents(plugin.oldarmor.get(e.getPlayer().getName()));
+				plugin.oldarmor.remove(e.getPlayer().getName());
+			}
 			plugin.players.remove(e.getPlayer().getName());
 		}
 	}
-
+	void oldarmor(Player p) {
+		
+	}
 }

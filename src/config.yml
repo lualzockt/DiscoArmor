@@ -24,7 +24,7 @@ names:
 async: false
 messages:
 
-  toggle-true: '§k§1@@§2DiscoMode§k§1@@ §r enabled.' # Message when you enable the DiscoArmor mode
+  toggle-true: 'DiscoMode enabled.' # Message when you enable the DiscoArmor mode
   
-  toggle-false: '§k§1@@§2DiscoMode§k§1@@ §r disabled.' # Message when you disable the DiscoArmor mode
+  toggle-false: 'DiscoMode disabled.' # Message when you disable the DiscoArmor mode
   

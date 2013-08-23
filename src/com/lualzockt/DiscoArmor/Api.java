@@ -1,5 +1,8 @@
 package com.lualzockt.DiscoArmor;
 
+import java.util.InputMismatchException;
+
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public abstract class Api {
@@ -7,22 +10,33 @@ public abstract class Api {
 	protected static void setPlugin(DiscoArmor pl) {
 	plugin  = pl;
 	}
-	
+	public static final String ARMOR = "armor";
+	public static final String WOOL = "wool";
+	public static final String NOTHING = "none";
 	public static void toggle(Player  p) {
 		plugin.toggle(p);
 	}
-	public static boolean enabled(Player p) {
+	public static void toggle(String n) {
+		Player p = Bukkit.getPlayer(n);
+		if(p == null) {
+			throw new NullPointerException("The player is not online.");
+		}
+	}
+	public static boolean isEnabledForUser(Player p) {
 		return plugin.players.containsKey(p.getName());
 	}
+	public static boolean isEnabledForUser(String p) {
+		return plugin.players.containsKey(p);
+	}
 	public static boolean on(Player p) {
-		if(enabled(p)) {
+		if(isEnabledForUser(p)) {
 			return false;
 		}
 		plugin.toggle(p);
 		return true;
 	}
 	public static boolean off(Player p) {
-		if(!enabled(p)) {
+		if(!isEnabledForUser(p)) {
 			return false;
 		}
 		plugin.toggle(p);
@@ -32,31 +46,46 @@ public abstract class Api {
 		return plugin.delay;
 	}
 	public static void setDelay(long delay) {
+		if(delay <= 0) {
+			throw new InputMismatchException("The delay must be bigger then 0");
+		}
 		plugin.delay = delay;
 	}
-	public String getHelmet() {
+	public String getHelmetType() {
 		return plugin.helmet;
 	}
-	public static void setHelmet(String helmet) {
+	public static void setHelmetType(String helmet) {
+		if(helmet.equalsIgnoreCase(ARMOR) || helmet.equalsIgnoreCase(WOOL) || helmet.equalsIgnoreCase(NOTHING))
 		plugin.helmet = helmet;
+		else
+		throw new InputMismatchException("Must be a valid type!");
 	}
-	public String getChestplate() {
+	public String getChestplateType() {
 		return plugin.chestplate;
 	}
-	public static void setChestplate(String chestplate) {
+	public static void setChestplateType(String chestplate) {
+		if(chestplate.equalsIgnoreCase(ARMOR) ||   chestplate.equalsIgnoreCase(NOTHING))
 		plugin.chestplate = chestplate;
+		else
+			throw new InputMismatchException("Must be a valid type!");
 	}
-	public String getLeggings() {
+	public String getLeggingsType() {
 		return plugin.leggings;
 	}
-	public static void setLeggings(String leggings) {
+	public static void setLeggingsType(String leggings) {
+		if(leggings.equalsIgnoreCase(ARMOR) || leggings.equalsIgnoreCase(NOTHING))
 		plugin.leggings = leggings;
+		else
+			throw new InputMismatchException("Must be a valid type!");
 	}
-	public String getBoots() {
+	public String getBootsType() {
 		return plugin.boots;
 	}
-	public static void setBoots(String boots) {
+	public static void setBootsType(String boots) {
+		if(boots.equalsIgnoreCase(ARMOR) || boots.equalsIgnoreCase(NOTHING))
 		plugin.boots = boots;
+		else
+			throw new InputMismatchException("Must be a valid type!");
 	}
 	public String getToggleTrueMessage() {
 		return plugin.toggleTrue;
@@ -64,10 +93,10 @@ public abstract class Api {
 	public static void setToggleTrueMessage(String toggleTrue) {
 		plugin.toggleTrue = toggleTrue;
 	}
-	public String getToggleFalse() {
+	public String getToggleFalseMessage() {
 		return plugin.toggleFalse;
 	}
-	public static void setToggleFalse(String toggleFalse) {
+	public static void setToggleFalseMessage(String toggleFalse) {
 		plugin.toggleFalse = toggleFalse;
 	}
 	public String getHelmetName() {

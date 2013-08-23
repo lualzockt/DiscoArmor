@@ -87,6 +87,25 @@ public class DiscoArmor extends JavaPlugin implements Runnable{
 		getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
 		loadConfig();
 		startScheduling();
+		try {
+			Metrics m = new Metrics(this);
+			m.start();
+		}catch(Exception ex) {
+			
+		}
+		
+		if(helmet == null) {
+			helmet = Api.ARMOR;
+		}
+		if(chestplate == null) {
+			chestplate = Api.ARMOR;
+		}
+		if(leggings == null) {
+			leggings = Api.ARMOR;
+		}
+		if(boots == null) {
+			boots = Api.ARMOR;
+		}
 	}
 	public void toggle(Player p) {
 		if(players.containsKey(p.getName())) {
