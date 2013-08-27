@@ -33,6 +33,7 @@ public class DiscoArmor extends JavaPlugin implements Runnable{
 	String chest_name = "Discochestplate";
 	String leggings_name = "Discoleggings";
 	String boots_name = "Discoboots";
+	String permissionMessage = "§cYou dont have permission.";
 	List<String> aliases;
 	public static final String PREFIX  = "§8[§cDiscoArmor§8]";
 	boolean enableMaxTime = false;
@@ -75,7 +76,7 @@ public class DiscoArmor extends JavaPlugin implements Runnable{
 		chest_name =   ChatColor.translateAlternateColorCodes('&',getConfig().getString("names.chestplate"));
 		leggings_name =   ChatColor.translateAlternateColorCodes('&',getConfig().getString("names.leggings"));
 		helmet_name =   ChatColor.translateAlternateColorCodes('&',getConfig().getString("names.helmet"));
-		
+		permissionMessage = ChatColor.translateAlternateColorCodes('&', getConfig().getString("permission-message"));
 	}
 	@Override
 	public void onEnable() {
@@ -196,7 +197,7 @@ public class DiscoArmor extends JavaPlugin implements Runnable{
 				}
 				if(players.get(s) > time) {
 					Player pl = Bukkit.getPlayer(s);
-					pl.chat("/da toggle");
+					toggle(pl);
 					continue;
 				}
 				if(helmet.equalsIgnoreCase("armor")) {

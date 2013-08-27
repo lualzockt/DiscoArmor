@@ -11,31 +11,41 @@ public class DiscoArmorCommand implements CommandExecutor {
 		this.plugin = discoArmor;
 	}
 	@Override
-	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+	public boolean onCommand(CommandSender cs, Command command, String label, String[] args) {
 			if(args.length  >= 1) {
 				if(args[0].equalsIgnoreCase("reload")) {
-					if (sender.hasPermission("discoarmor.reload")) {
+					if (cs.hasPermission("discoarmor.reload")) {
 						plugin.players.clear();
 						plugin.reloadConfig();
 						plugin.loadConfig();
-						sender.sendMessage(plugin.PREFIX + " DiscoArmor has been reloaded.");
+						cs.sendMessage(plugin.PREFIX + " DiscoArmor has been reloaded.");
 					}else {
-						sender.sendMessage("§cYou don't have permission to reload the config.");
+						cs.sendMessage("§cYou don't have permission to reload the config.");
 					}
 				}else if(args[0].equalsIgnoreCase("info")) {
-					sender.sendMessage(plugin.PREFIX + " §7You are using DiscoArmor v. "+ plugin.getDescription().getVersion() + " by LualZockt.");
+					if(cs.hasPermission("discoarmor.info")) {
+						cs.sendMessage(plugin.PREFIX + " §7You are using DiscoArmor v. "+ plugin.getDescription().getVersion() + " by LualZockt.");
+
+					}else {
+						cs.sendMessage("§cYou do not have permission.");
+					}
 				}else if (args[0].equalsIgnoreCase("help")) {
-					sender.sendMessage(plugin.PREFIX +" §7Help of DiscoArmor");
-					sender.sendMessage("§c/da toggle§8 - Disable and enable the DiscoArmor-Mode.");
-					sender.sendMessage("§c/da reload§8 - Reloads the Config.");
-					sender.sendMessage("§c/da info§8- Get info about the plugin.");
+					if(cs.hasPermission("discoarmor.help")) {
+						cs.sendMessage(plugin.PREFIX +" §7Help of DiscoArmor");
+						cs.sendMessage("§c/da toggle§8 - Disable and enable the DiscoArmor-Mode.");
+						cs.sendMessage("§c/da reload§8 - Reloads the Config.");
+						cs.sendMessage("§c/da info§8- Get info about the plugin.");
+					}else {
+						cs.sendMessage("§cYou do not have permission.");
+					}
+					
 				}else if(args[0].equalsIgnoreCase("toggle")) {
 						
-						if(!(sender instanceof Player)) {
-							sender.sendMessage("§cYou have to be a Player!");
+						if(!(cs instanceof Player)) {
+							cs.sendMessage("§cYou have to be a Player!");
 							return true;
 						}
-						Player p = (Player) sender;
+						Player p = (Player) cs;
 						if(p.hasPermission("discoarmor.toggle") || p.hasPermission("da.toggle")) {
 							plugin.toggle(p);
 						}
@@ -43,13 +53,13 @@ public class DiscoArmorCommand implements CommandExecutor {
 							p.sendMessage("§cYou don't have permission to do this.");
 						}
 				} else if(args[0].equalsIgnoreCase("options")) {
-					sender.sendMessage("§4§k@@§2Coming Soon!§4§@@");
+					cs.sendMessage("§4§k@@§2Coming Soon!§4k§@@");
 				}
 				else {
-				     sender.sendMessage("§cUnknow Command! §8Type /da help for help.");
+				     cs.sendMessage("§cUnknow Command! §8Type /da help for help.");
 				}
 			}else {
-				sender.sendMessage("§cType /da help for help.");
+				cs.sendMessage("§cType /da help for help.");
 			}
 		return true;
 			

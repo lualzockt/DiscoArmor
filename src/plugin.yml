@@ -1,5 +1,5 @@
 name: DiscoArmor
-version: 1.5.4
+version: 1.6.1
 author: LualZockt
 website: http://dev.bukkit.org/bukkit-plugins/discoarmor
 main: com.lualzockt.DiscoArmor.DiscoArmor
@@ -11,6 +11,18 @@ commands:
     
     
 permissions:
+  discoarmor.*:
+    description: All permissions:
+    children:
+      discoarmor.reload
+      discoarmor.toggle
+      discoarmor.info
+      discoarmor.help
   discoarmor.toggle:
     description: Toggles your DiscoArmor-Mode
-    default: true  
+  discoarmor.help:
+    description: Permission to see the help
+    default: true
+  discoarmor.info:
+    default: true
+    
