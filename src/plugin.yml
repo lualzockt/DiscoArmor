@@ -13,4 +13,4 @@ commands:
 permissions:
   discoarmor.toggle:
     description: Toggles your DiscoArmor-Mode
-    default: true    
+    default: true  

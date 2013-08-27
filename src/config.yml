@@ -22,6 +22,11 @@ names:
   leggings: Discoleggings
   boots: Discoboots
 async: false
+
+aliases:
+- superarmor
+
+permission-message: &cYou do not have permission to use DiscoArmor.
 messages:
 
   toggle-true: 'DiscoMode enabled.' # Message when you enable the DiscoArmor mode
