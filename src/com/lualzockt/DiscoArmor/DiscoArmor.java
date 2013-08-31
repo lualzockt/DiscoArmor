@@ -17,11 +17,20 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.lualzockt.DiscoArmor.util.Metrics;
+import com.lualzockt.DiscoArmor.util.UpdateCheckWrapper;
+
 public class DiscoArmor extends JavaPlugin implements Runnable{
 	
-
-	public Map<String,Integer> players;
-	public Map<String, ItemStack[]> oldarmor = new HashMap<String, ItemStack[]>();
+	private DiscoArmorApi api;
+	public DiscoArmorApi api() {
+		if(api == null) {
+			api = new DiscoArmorApi(this);
+		}
+		return api;
+	}
+	protected Map<String,Integer> players;
+	protected Map<String, ItemStack[]> oldarmor = new HashMap<String, ItemStack[]>();
 	long delay;
 	String helmet = "armor";
 	String chestplate = "armor";
@@ -36,11 +45,12 @@ public class DiscoArmor extends JavaPlugin implements Runnable{
 	String permissionMessage = "§cYou dont have permission.";
 	List<String> aliases;
 	public static final String PREFIX  = "§8[§cDiscoArmor§8]";
-	boolean enableMaxTime = false;
-	boolean async = false;
-	int time;
-	int task = 0; // The id of the Scheduler Task
-	public void startScheduling() {
+	public boolean updateNeeded = false;
+	protected boolean enableMaxTime = false;
+	protected boolean async = false;
+	protected int time;
+	protected int task = 0; // The id of the Scheduler Task
+	protected void startScheduling() {
 		if(async) {
 			task = Bukkit.getScheduler().scheduleAsyncRepeatingTask(this, this, 0,delay);
 			}else {
@@ -48,7 +58,7 @@ public class DiscoArmor extends JavaPlugin implements Runnable{
 			}
 		
 	}
-	public void loadConfig(){
+	protected void loadConfig(){
 		saveDefaultConfig();
 		getConfig().addDefault("aliases", new ArrayList<String>());
 		List<String> al = getConfig().getStringList("aliases");
@@ -80,7 +90,7 @@ public class DiscoArmor extends JavaPlugin implements Runnable{
 	}
 	@Override
 	public void onEnable() {
-		Api.setPlugin(this);
+		api();
 		aliases = new LinkedList<String>();
 		players = new HashMap<String,Integer>();
 		oldarmor = new HashMap<String, ItemStack[]>();
@@ -96,19 +106,23 @@ public class DiscoArmor extends JavaPlugin implements Runnable{
 		}
 		
 		if(helmet == null) {
-			helmet = Api.ARMOR;
+			helmet = api.ARMOR;
 		}
 		if(chestplate == null) {
-			chestplate = Api.ARMOR;
+			chestplate = api.ARMOR;
 		}
 		if(leggings == null) {
-			leggings = Api.ARMOR;
+			leggings = api.ARMOR;
 		}
 		if(boots == null) {
-			boots = Api.ARMOR;
+			boots = api.ARMOR;
 		}
+		this.checkForUpdate();
 	}
-	public void toggle(Player p) {
+	public void checkForUpdate() {
+		new UpdateCheckWrapper(this.getLogger(), this);
+	}
+	protected void toggle(Player p) {
 		if(players.containsKey(p.getName())) {
 			players.remove(p.getName());
 			p.sendMessage(toggleFalse);
