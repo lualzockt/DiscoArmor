@@ -1,8 +1,8 @@
 name: DiscoArmor
-version: 1.7.1
+version: 2.4.2
 author: LualZockt
 website: http://dev.bukkit.org/bukkit-plugins/discoarmor
-main: com.lualzockt.DiscoArmor.DiscoArmor
+main: de.lualzockt.DiscoArmor.DiscoArmor
 
 commands:
   discoarmor:
