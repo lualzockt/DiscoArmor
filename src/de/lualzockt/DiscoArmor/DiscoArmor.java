@@ -8,8 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import org.mcstats.Metrics;
-
+import de.lualzockt.DiscoArmor.Utils.PluginMetrics;
 import de.lualzockt.DiscoArmor.Utils.Updater;
 import de.lualzockt.DiscoArmor.api.DiscoArmorApi;
 import de.lualzockt.DiscoArmor.api.DiscoArmorToggleEvent;
@@ -220,7 +219,7 @@ implements Runnable
 		loadConfig();
 		startScheduling();
 		try {
-			Metrics m = new Metrics(this);
+			PluginMetrics m = new PluginMetrics(this);
 			m.start();
 		} catch (Exception ex) {
 			getLogger().severe("Metrics could not be loaded.");
